@@ -23,12 +23,7 @@ python3 -m http.server 8000
 
 ## GitHub Pages 部署
 
-本项目已包含 `.github/workflows/deploy-pages.yml`。推送到 GitHub 后：
-
-1. 打开仓库的 **Settings → Pages**。
-2. 将 **Build and deployment → Source** 设置为 **GitHub Actions**。
-3. 打开 **Actions**，等待 `Deploy static site to GitHub Pages` 成功。
-4. 网站地址通常为 `https://<GitHub用户名>.github.io/<仓库名>/`。
+本仓库使用 GitHub Pages 的 **legacy 分支部署**方式（Settings → Pages → Source 为 `Deploy from a branch`，分支 `main`，目录 `/`）。推送到 `main` 分支后，GitHub 会自动发布，无需任何额外配置。
 
 ### 首次推送
 
@@ -43,12 +38,13 @@ git remote add origin https://github.com/<GitHub用户名>/<仓库名>.git
 git push -u origin main
 ```
 
+推送后等待 1~2 分钟，网站地址为 `https://<GitHub用户名>.github.io/<仓库名>/`。
+
 推送时请使用 GitHub 的浏览器登录、SSH 密钥或 Personal Access Token；不要把令牌写入项目文件。
 
 ## 目录结构
 
 ```
-index.html                          # 站点唯一入口（单文件应用）
-.github/workflows/deploy-pages.yml  # GitHub Pages 自动部署
+index.html   # 站点唯一入口（单文件应用）
 README.md
 ```
