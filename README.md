@@ -1,50 +1,36 @@
-# CS2 Vault
+# CS2 Vault — 模拟开箱网站
 
-一个纯静态、单文件的 CS2 开箱演示站，适合直接部署到 GitHub Pages。
+🎁 **CS2 Vault** 是一个基于真实 CS2 皮肤数据的模拟开箱网站，纯前端静态页面，无需后端。
 
-- 全站只有一个文件：`index.html`（HTML + CSS + JS + 音效全部内嵌，零依赖）
-- 支持开箱动画、库存、市场、排行榜、开发者模式、用户封禁
+## 🌐 在线体验
+👉 [点击访问 GitHub Pages](https://guiwow911.github.io/cs2-vault/)
 
-## 功能与限制
+## ✨ 功能特性
 
-- 网站数据仅保存在访问者当前浏览器的 `localStorage` 中。
-- 登录、开发者模式和用户封禁均为前端演示功能，不是真实的服务端账号或管理系统。
-- 开发者演示账号为 `1` / `1`，不能用于真实生产环境。
-- 网站不连接 Steam、支付服务或任何外部 API。
+- 🎁 **武器箱** — 全部真实 CS2 武器箱 / 胶囊，包含完整皮肤列表
+- 🎰 **模拟开箱** — 真实稀有度概率（Covert ~0.64%、Contraband ~0.26%）+ 滚轮动画
+- ×1 / ×3 / ×5 / ×10 批量开箱模式
+- 🔫 **皮肤库** — 浏览全部 CS2 皮肤，按稀有度筛选，无限滚动加载
+- 🎒 **背包系统** — 保存开箱所得，随时卖出换钱
+- 📜 **开箱记录** — 历史记录保存最近 200 条
+- 💰 **余额系统** — 本地存储余额，支持充值
+- 🎨 **皮肤图片** — 全部来源于官方 Steam CDN
 
-## 本地预览
+## 🗂 技术栈
 
-直接用浏览器打开 `index.html` 即可，也可以起一个本地服务器：
+| 项目 | 说明 |
+|------|------|
+| 纯 HTML/CSS/JS | 零依赖，单文件 |
+| [ByMykel/CSGO-API](https://github.com/ByMykel/CSGO-API) | CS2 皮肤数据 |
+| Steam CDN | 皮肤图片 |
+| GitHub Pages | 静态托管 |
+| localStorage | 本地持久化存储 |
 
-```bash
-python3 -m http.server 8000
-# 然后访问 http://localhost:8000
-```
+## 🚀 部署
 
-## GitHub Pages 部署
+1. Fork 本仓库
+2. 进入 Settings → Pages → Source 选择 `GitHub Actions`
+3. 推送任意提交自动触发部署
 
-本仓库使用 GitHub Pages 的 **legacy 分支部署**方式（Settings → Pages → Source 为 `Deploy from a branch`，分支 `main`，目录 `/`）。推送到 `main` 分支后，GitHub 会自动发布，无需任何额外配置。
-
-### 首次推送
-
-在项目目录运行：
-
-```bash
-git init
-git add .
-git commit -m "Deploy CS2 Vault to GitHub Pages"
-git branch -M main
-git remote add origin https://github.com/<GitHub用户名>/<仓库名>.git
-git push -u origin main
-```
-
-推送后等待 1~2 分钟，网站地址为 `https://<GitHub用户名>.github.io/<仓库名>/`。
-
-推送时请使用 GitHub 的浏览器登录、SSH 密钥或 Personal Access Token；不要把令牌写入项目文件。
-
-## 目录结构
-
-```
-index.html   # 站点唯一入口（单文件应用）
-README.md
-```
+---
+> ⚠️ 本项目为娱乐模拟，不涉及真实交易。
