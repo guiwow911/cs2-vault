@@ -14,7 +14,7 @@ nav{display:flex;gap:24px;flex:1}nav button{border:0;background:none;color:#8993
 .userbar{display:flex;gap:10px;align-items:center}.balance{padding:10px 13px;border:1px solid #303847;border-radius:9px;background:#111721}.balance b{color:#f4b942}
 .btn{border:1px solid #374153;border-radius:9px;background:#18202c;color:#fff;padding:10px 14px;cursor:pointer;font-weight:800}.btn:hover{background:#222c3b}.dev-badge{padding:5px 8px;border-radius:6px;background:#4b3510;color:#ffd66b;font-size:10px;font-weight:900;letter-spacing:.5px}
 main{max-width:1120px;margin:auto;padding:42px 20px 70px}.page{display:none}.page.active{display:block}
-.hero{text-align:center;margin-bottom:28px}.hero .tag{color:#f4b942;font-size:11px;font-weight:900;letter-spacing:2px}.hero h1{font-size:44px;margin:8px 0}.hero p{color:#8993a4;max-width:650px;margin:auto;line-height:1.6}
+.hero{text-align:center;margin-bottom:28px}.tag{color:#f4b942;font-size:11px;font-weight:900;letter-spacing:2px}.hero h1{font-size:44px;margin:8px 0}.hero p{color:#8993a4;max-width:650px;margin:auto;line-height:1.6}
 .case{max-width:920px;margin:auto;background:#10151e;border:1px solid #28303e;border-radius:18px;padding:25px}.casehead{display:flex;justify-content:space-between}.price{color:#f4b942;font-weight:900}
 .reel{height:170px;margin:24px 0;overflow:hidden;border-radius:12px;border:1px solid #293140;background:#080b10;position:relative}
 .reel:after{content:"";position:absolute;left:50%;top:0;height:100%;width:3px;background:#f4b942;box-shadow:0 0 18px #f4b942;transform:translateX(-50%);z-index:3}
@@ -111,26 +111,38 @@ main{max-width:1120px;margin:auto;padding:42px 20px 70px}.page{display:none}.pag
 "use strict";
 /* ============ 数据 ============ */
 const skins=[
-{name:"Glock-18 | Trace",icon:"🔫",rarity:"blue",label:"Mil-Spec",weight:58},
-{name:"MP9 | Circuit",icon:"🔫",rarity:"blue",label:"Mil-Spec",weight:0},
-{name:"USP-S | Night Grid",icon:"🔫",rarity:"blue",label:"Mil-Spec",weight:0},
-{name:"M4A1-S | Vapor",icon:"🔫",rarity:"purple",label:"Restricted",weight:25},
-{name:"AK-47 | Neon Edge",icon:"🔫",rarity:"purple",label:"Restricted",weight:0},
-{name:"AWP | Frostbyte",icon:"🎯",rarity:"purple",label:"Restricted",weight:0},
-{name:"Desert Eagle | Pulse",icon:"🔫",rarity:"pink",label:"Classified",weight:11},
-{name:"Karambit | Eclipse",icon:"🔪",rarity:"pink",label:"Classified",weight:0},
+{name:"Glock-18 | Trace",icon:"🔫",rarity:"blue",label:"Mil-Spec",weight:30},
+{name:"MP9 | Circuit",icon:"🔫",rarity:"blue",label:"Mil-Spec",weight:16},
+{name:"USP-S | Night Grid",icon:"🔫",rarity:"blue",label:"Mil-Spec",weight:12},
+{name:"M4A1-S | Vapor",icon:"🔫",rarity:"purple",label:"Restricted",weight:12},
+{name:"AK-47 | Neon Edge",icon:"🔫",rarity:"purple",label:"Restricted",weight:8},
+{name:"AWP | Frostbyte",icon:"🎯",rarity:"purple",label:"Restricted",weight:5},
+{name:"Desert Eagle | Pulse",icon:"🔫",rarity:"pink",label:"Classified",weight:6},
+{name:"Karambit | Eclipse",icon:"🔪",rarity:"pink",label:"Classified",weight:5},
 {name:"M4A4 | Redline X",icon:"🔫",rarity:"red",label:"Covert",weight:5},
 {name:"★ Butterfly Knife | Aurora",icon:"🔪",rarity:"gold",label:"Extraordinary",weight:1}
 ];
 const price={blue:.80,purple:2.50,pink:6.90,red:18,gold:79};
 const rank={blue:1,purple:2,pink:3,red:4,gold:5};
 
-/* ============ 安全读取 localStorage（数据损坏时不崩溃） ============ */
+/* ============ 存储层：localStorage 不可用（沙箱/隐私模式）时自动回退到内存，页面永不崩溃 ============ */
+const store=(()=>{
+  const mem={};
+  let ok=true;
+  try{localStorage.setItem("__vault_t","1");localStorage.removeItem("__vault_t")}catch(e){ok=false}
+  return{
+    get(k){if(ok)try{const v=localStorage.getItem(k);if(v!=null)return v}catch(e){ok=false}return k in mem?mem[k]:null},
+    set(k,v){mem[k]=String(v);if(ok)try{localStorage.setItem(k,String(v))}catch(e){ok=false}},
+    remove(k){delete mem[k];if(ok)try{localStorage.removeItem(k)}catch(e){ok=false}}
+  };
+})();
+
+/* ============ 安全读取（数据损坏时不崩溃） ============ */
 function loadJSON(key,fallback){
-  try{return JSON.parse(localStorage.getItem(key)||"null")??fallback}catch(e){return fallback}
+  try{return JSON.parse(store.get(key)||"null")??fallback}catch(e){return fallback}
 }
 function loadNum(key,fallback){
-  const n=parseFloat(localStorage.getItem(key));
+  const n=parseFloat(store.get(key));
   return Number.isFinite(n)?n:fallback;
 }
 
@@ -141,16 +153,16 @@ let opened=loadNum("vault_opened",0);
 let best=loadNum("vault_best",0);
 let bannedUsers=loadJSON("vault_banned_users",[]);
 if(!Array.isArray(bannedUsers))bannedUsers=[];
-let user=localStorage.getItem("vault_user")||"";
-let isDev=localStorage.getItem("vault_dev")==="1";
+let user=store.get("vault_user")||"";
+let isDev=store.get("vault_dev")==="1";
 let spinning=false;
 
 /* 被封禁的用户：清除本地登录态 */
 if(user && bannedUsers.includes(user)){
   user="";
   isDev=false;
-  localStorage.removeItem("vault_user");
-  localStorage.removeItem("vault_dev");
+  store.remove("vault_user");
+  store.remove("vault_dev");
 }
 
 const $=id=>document.getElementById(id);
@@ -158,10 +170,10 @@ const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"
 
 /* ============ 渲染 ============ */
 function save(){
-  localStorage.setItem("vault_balance",balance.toFixed(2));
-  localStorage.setItem("vault_inventory",JSON.stringify(inventory));
-  localStorage.setItem("vault_opened",opened);
-  localStorage.setItem("vault_best",best);
+  store.set("vault_balance",balance.toFixed(2));
+  store.set("vault_inventory",JSON.stringify(inventory));
+  store.set("vault_opened",opened);
+  store.set("vault_best",best);
 }
 function update(){
   $("devBalance").textContent="$"+balance.toFixed(2);
@@ -239,18 +251,8 @@ function openCase(){
   const center=reel.getBoundingClientRect().width/2;
   const finalX=-(winnerIndex*itemWidth+65-center);
 
-  // Web Animations API：不依赖 CSS transition，保证动画一定播放
-  const animation=track.animate(
-    [
-      {transform:"translateX(0px)"},
-      {transform:`translateX(${finalX}px)`}
-    ],
-    {duration:5200,easing:"cubic-bezier(0.08,0.78,0.12,1)",fill:"forwards"}
-  );
-
-  reel.classList.add("spinning");
-
-  animation.onfinish=()=>{
+  // 结算（动画结束或降级时都会执行）
+  const finish=()=>{
     track.style.transform=`translateX(${finalX}px)`;
     reel.classList.remove("spinning");
 
@@ -268,12 +270,29 @@ function openCase(){
     spinning=false;
     $("openBtn").disabled=false;
   };
+
+  try{
+    // Web Animations API：不依赖 CSS transition，保证动画一定播放
+    const animation=track.animate(
+      [
+        {transform:"translateX(0px)"},
+        {transform:`translateX(${finalX}px)`}
+      ],
+      {duration:5200,easing:"cubic-bezier(0.08,0.78,0.12,1)",fill:"forwards"}
+    );
+    reel.classList.add("spinning");
+    animation.onfinish=finish;
+  }catch(e){
+    // 不支持动画 API 的浏览器：直接结算，避免按钮永久卡死
+    finish();
+  }
 }
 function sellAll(){
   if(inventory.length===0){alert("库存为空，没有可出售的物品。");return}
   const total=(inventory.length*1.25);
   const count=inventory.length;
-  if(!confirm(`确定出售全部 ${count} 件物品？\n将获得 $${total.toFixed(2)}`))return;
+  if(!confirm(`确定出售全部 ${count} 件物品？
+将获得 $${total.toFixed(2)}`))return;
   inventory=[];
   balance+=total;
   save();
@@ -304,12 +323,15 @@ $("loginBtn").onclick=()=>{
   if(user){
     if(confirm("退出当前账户？")){
       user="";isDev=false;
-      localStorage.removeItem("vault_user");
-      localStorage.removeItem("vault_dev");
+      store.remove("vault_user");
+      store.remove("vault_dev");
       refreshDevNav();
       update();
     }
-  }else $("loginModal").classList.add("show");
+  }else{
+    $("password").value="";
+    $("loginModal").classList.add("show");
+  }
 };
 $("closeLogin").onclick=()=>$("loginModal").classList.remove("show");
 $("doLogin").onclick=()=>{
@@ -324,10 +346,11 @@ $("doLogin").onclick=()=>{
   if(u==="1" && pw==="1"){
     user="1";
     isDev=true;
-    localStorage.setItem("vault_user","1");
-    localStorage.setItem("vault_dev","1");
+    store.set("vault_user","1");
+    store.set("vault_dev","1");
     refreshDevNav();
     $("loginModal").classList.remove("show");
+    $("password").value="";
     update();
     alert("开发者模式已启用。");
     return;
@@ -335,10 +358,11 @@ $("doLogin").onclick=()=>{
 
   user=u;
   isDev=false;
-  localStorage.setItem("vault_user",user);
-  localStorage.removeItem("vault_dev");
+  store.set("vault_user",user);
+  store.remove("vault_dev");
   refreshDevNav();
   $("loginModal").classList.remove("show");
+  $("password").value="";
   update();
 };
 $("search").oninput=renderMarket;
@@ -347,7 +371,7 @@ $("sellAllBtn").onclick=sellAll;
 
 /* ============ 开发者 / 封禁 ============ */
 function saveBans(){
-  localStorage.setItem("vault_banned_users",JSON.stringify(bannedUsers));
+  store.set("vault_banned_users",JSON.stringify(bannedUsers));
 }
 function renderBannedUsers(){
   const box=$("bannedList");
@@ -401,6 +425,7 @@ renderBannedUsers();
 refreshDevNav();
 update();
 makeReel(skins[0]);
+
 </script>
 </body>
 </html>
