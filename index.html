@@ -104,9 +104,10 @@ nav{display:flex;gap:2px;padding:0 22px;background:var(--s1);border-bottom:1px s
 
 /* OPEN CONTROLS */
 .or{display:flex;align-items:center;gap:8px;margin-top:14px;flex-wrap:wrap}
-.qb{display:flex;gap:4px}
-.qbtn{padding:7px 11px;background:var(--s2);border:1px solid var(--border);border-radius:7px;color:var(--txt);font-size:13px;font-weight:700;cursor:pointer;transition:all .2s}
+.qb{display:flex;gap:4px;flex-wrap:wrap}
+.qbtn{padding:7px 11px;background:var(--s2);border:1px solid var(--border);border-radius:7px;color:var(--txt);font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap}
 .qbtn.on,.qbtn:hover{background:rgba(232,168,56,.12);border-color:var(--accent);color:var(--accent)}
+.qbtn.big{border-color:rgba(232,168,56,.4)}
 .btn-open{flex:1;min-width:130px;padding:10px 18px;background:linear-gradient(135deg,#e8a838,#ffd166);color:#1a1000;font-size:14px;font-weight:900;border:none;border-radius:8px;cursor:pointer;text-transform:uppercase;transition:filter .2s,transform .15s}
 .btn-open:hover{filter:brightness(1.1);transform:translateY(-1px)}
 .ct{font-size:11px;color:var(--muted)}
@@ -148,17 +149,28 @@ nav{display:flex;gap:2px;padding:0 22px;background:var(--s1);border-bottom:1px s
 .bclose:hover{color:var(--txt);border-color:var(--txt)}
 
 /* MULTI */
-.mp{display:none;flex-direction:column;align-items:center;gap:13px;width:92%;max-width:860px;margin-top:22px}
+.mp{display:none;flex-direction:column;align-items:center;gap:12px;width:94%;max-width:980px;margin-top:0;padding:0 4px}
 .mp.on{display:flex}
-.mhdr{font-size:15px;font-weight:900;color:var(--accent)}
-.mg{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:8px;width:100%}
-.mcard{background:var(--s1);border:2px solid;border-radius:9px;padding:9px 7px;text-align:center;animation:fu .3s ease both}
+.mhdr{font-size:15px;font-weight:900;color:var(--accent);text-align:center}
+.mhdr small{display:block;font-size:11px;font-weight:600;color:var(--muted);margin-top:4px;letter-spacing:0;text-transform:none}
+.msum{display:flex;gap:5px;flex-wrap:wrap;justify-content:center;width:100%}
+.mtag{display:flex;align-items:center;gap:5px;padding:4px 9px;background:var(--s2);border:1px solid var(--border);border-radius:20px;font-size:10px;font-weight:700;color:var(--muted)}
+.mtag b{font-size:11px}
+.mtag.hi{border-color:var(--accent);background:rgba(232,168,56,.1);color:var(--txt)}
+.mg{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:8px;width:100%;max-height:54vh;overflow-y:auto;overflow-x:hidden;padding:2px 4px 2px 2px}
+.mg.big{grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:5px;max-height:56vh}
+.mcard{background:var(--s1);border:2px solid;border-radius:9px;padding:9px 7px;text-align:center;animation:fu .3s ease both;content-visibility:auto;contain-intrinsic-size:auto 128px}
+.mg.big .mcard{padding:6px 4px;border-width:1px;border-radius:7px}
+.mg.big .mcard img{width:60px;height:45px;margin-bottom:3px}
+.mg.big .mc-n{font-size:8px}
+.mg.big .mc-w,.mg.big .mc-p{font-size:8px}
+.mcard.best{box-shadow:0 0 0 2px var(--accent),0 0 18px rgba(232,168,56,.3)}
 @keyframes fu{from{opacity:0;transform:translateY(7px)}to{opacity:1}}
 .mcard img{width:74px;height:56px;object-fit:contain;display:block;margin:0 auto 5px}
 .mc-n{font-size:9px;font-weight:700;line-height:1.3}
 .mc-w{font-size:8px;color:var(--muted);margin-top:1px}
 .mc-p{font-size:10px;font-weight:800;color:var(--ok);margin-top:2px}
-.mtotal{font-size:13px;color:var(--muted)}.mtotal span{color:var(--ok);font-weight:800}
+.mtotal{font-size:13px;color:var(--muted);text-align:center}.mtotal span{font-weight:800}
 
 /* INVENTORY */
 .srow{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
@@ -200,7 +212,7 @@ nav{display:flex;gap:2px;padding:0 22px;background:var(--s1);border-bottom:1px s
 .sk-p{font-size:10px;font-weight:800;color:var(--ok);margin-top:3px}
 
 /* TOAST */
-.toast{position:fixed;bottom:20px;right:20px;background:var(--s2);border:1px solid var(--border);padding:11px 15px;border-radius:9px;font-size:12px;z-index:999;transform:translateY(80px);opacity:0;transition:transform .3s,opacity .3s;max-width:260px;line-height:1.4}
+.toast{position:fixed;bottom:20px;right:20px;background:var(--s2);border:1px solid var(--border);padding:11px 15px;border-radius:9px;font-size:12px;z-index:999;transform:translateY(80px);opacity:0;transition:transform .3s,opacity .3s;max-width:min(340px,86vw);line-height:1.5}
 .toast.on{transform:translateY(0);opacity:1}
 .toast.ok{border-color:var(--ok);color:var(--ok)}.toast.err{border-color:var(--danger);color:var(--danger)}
 
@@ -213,6 +225,10 @@ nav{display:flex;gap:2px;padding:0 22px;background:var(--s1);border-bottom:1px s
   nav{padding:0 5px}.nt{padding:10px 9px;font-size:11px}
   .page{padding:13px}.rc{padding:18px 12px}
   .sc{width:108px}
+  .qbtn{padding:6px 8px;font-size:12px}
+  .mg{max-height:46vh}
+  .mg.big{max-height:44vh}
+  .btn-open{min-width:110px;padding:9px 12px;font-size:13px}
 }
 </style>
 </head>
@@ -231,7 +247,7 @@ nav{display:flex;gap:2px;padding:0 22px;background:var(--s1);border-bottom:1px s
       <span class="bal-lbl">余额</span>
       <span class="bal-val" id="bal">$1,000.00</span>
     </div>
-    <button class="btn-topup" onclick="topUp()">+ 充值</button>
+    <button class="btn-topup" onclick="topUp()">+ 充值 $100</button>
   </div>
 </header>
 
@@ -246,25 +262,26 @@ nav{display:flex;gap:2px;padding:0 22px;background:var(--s1);border-bottom:1px s
 <div class="page on" id="page-cases">
   <div id="pbar">
     <div class="pdot spin" id="pdot"></div>
-    <span id="ptxt">正在加载皮肤数据…</span>
+    <span id="ptxt">正在加载武器箱 / 皮肤数据…</span>
     <span class="pbar-right" id="pright"></span>
   </div>
 
   <!-- 官方爆率说明 -->
   <div class="odds-table">
     <div style="font-size:11px;font-weight:800;color:var(--muted);width:100%;margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em">⚡ Valve 官方爆率</div>
-    <div class="odds-item"><div class="odds-dot" style="background:#4b69ff"></div><span>Mil-Spec</span><span class="odds-pct" style="color:#4b69ff">79.92%</span></div>
-    <div class="odds-item"><div class="odds-dot" style="background:#8847ff"></div><span>Restricted</span><span class="odds-pct" style="color:#8847ff">15.98%</span></div>
-    <div class="odds-item"><div class="odds-dot" style="background:#d32ce6"></div><span>Classified</span><span class="odds-pct" style="color:#d32ce6">3.20%</span></div>
-    <div class="odds-item"><div class="odds-dot" style="background:#eb4b4b"></div><span>Covert</span><span class="odds-pct" style="color:#eb4b4b">0.64%</span></div>
+    <div class="odds-item"><div class="odds-dot" style="background:#4b69ff"></div><span>军规级 Mil-Spec</span><span class="odds-pct" style="color:#4b69ff">79.92%</span></div>
+    <div class="odds-item"><div class="odds-dot" style="background:#8847ff"></div><span>受限级 Restricted</span><span class="odds-pct" style="color:#8847ff">15.98%</span></div>
+    <div class="odds-item"><div class="odds-dot" style="background:#d32ce6"></div><span>保密级 Classified</span><span class="odds-pct" style="color:#d32ce6">3.20%</span></div>
+    <div class="odds-item"><div class="odds-dot" style="background:#eb4b4b"></div><span>隐秘级 Covert</span><span class="odds-pct" style="color:#eb4b4b">0.64%</span></div>
     <div class="odds-item"><div class="odds-dot" style="background:#e4ae39"></div><span>★ 刀/手套</span><span class="odds-pct" style="color:#e4ae39">0.26%</span></div>
-    <div class="odds-item"><div class="odds-dot" style="background:#aaa"></div><span>StatTrak™</span><span class="odds-pct" style="color:#aaa">×10%</span></div>
+    <div class="odds-item"><div class="odds-dot" style="background:#aaa"></div><span>StatTrak™（独立概率）</span><span class="odds-pct" style="color:#aaa">10%</span></div>
   </div>
 
   <div class="st">选择武器箱</div>
   <div class="bar">
     <input class="si" id="cq" placeholder="🔍 搜索武器箱…" oninput="filterCases()"/>
     <div id="tc" style="display:flex;gap:5px;flex-wrap:wrap"></div>
+    <span id="pcount" style="font-size:11px;color:var(--muted);margin-left:auto"></span>
   </div>
   <div id="cw"><div class="ld"><div class="sp"></div><span>连接数据源…</span></div></div>
 </div>
@@ -273,8 +290,9 @@ nav{display:flex;gap:2px;padding:0 22px;background:var(--s1);border-bottom:1px s
 <div class="page" id="page-skins">
   <div class="st">全部皮肤</div>
   <div class="bar">
-    <input class="si" id="sq" placeholder="🔍 搜索皮肤…" oninput="filterSkins()"/>
+    <input class="si" id="sq" placeholder="🔍 搜索皮肤（可搜武器名，如 ak47 / awp）…" oninput="filterSkins()"/>
     <div id="rc2" style="display:flex;gap:5px;flex-wrap:wrap"></div>
+    <span id="scount" style="font-size:11px;color:var(--muted);margin-left:auto"></span>
   </div>
   <div id="sw"><div class="ld"><div class="sp"></div><span>加载皮肤库…</span></div></div>
 </div>
@@ -288,7 +306,13 @@ nav{display:flex;gap:2px;padding:0 22px;background:var(--s1);border-bottom:1px s
     <div class="sb"><div class="sl">开箱次数</div><div class="sv" id="so">0</div></div>
     <div class="sb"><div class="sl">最贵物品</div><div class="sv" id="sbest">—</div></div>
   </div>
-  <div class="bar"><div id="ic" style="display:flex;gap:5px;flex-wrap:wrap"></div></div>
+  <div style="font-size:11px;color:var(--muted);margin:-6px 0 14px;line-height:1.7">
+    开出的物品会自动存入背包；批量开箱后若不想逐个点，可用右侧「一键卖出」按当前筛选清空。
+  </div>
+  <div class="bar">
+    <div id="ic" style="display:flex;gap:5px;flex-wrap:wrap"></div>
+    <button class="chip" id="sellrest" onclick="sellFiltered()" style="margin-left:auto;border-color:rgba(67,232,122,.45);color:var(--ok)">💰 一键卖出</button>
+  </div>
   <div class="ig2" id="ig"></div>
 </div>
 
@@ -303,7 +327,7 @@ nav{display:flex;gap:2px;padding:0 22px;background:var(--s1);border-bottom:1px s
   <div class="modal">
     <button class="mx" onclick="closeModal()">✕</button>
     <div class="mt">
-      <img id="mci" src="" class="mc-img"/>
+      <img id="mci" src="" class="mc-img" alt="武器箱"/>
       <div>
         <div class="mi-title" id="mct"></div>
         <div class="mi-sub" id="mcs"></div>
@@ -312,19 +336,22 @@ nav{display:flex;gap:2px;padding:0 22px;background:var(--s1);border-bottom:1px s
     </div>
     <div class="sub-t">箱内物品 <span id="items-count" style="color:var(--accent)"></span></div>
     <div class="ig" id="mit"></div>
-    <div class="sub-t" id="rlt" style="color:#e4ae39">★ 稀有特殊物品（0.26%）</div>
+    <div class="sub-t" id="rlt" style="color:#e4ae39">★ 稀有特殊物品</div>
     <div class="ig" id="mir"></div>
     <div class="or">
-      <div class="qb">
-        <button class="qbtn on" onclick="setQty(1,this)">×1</button>
-        <button class="qbtn" onclick="setQty(3,this)">×3</button>
-        <button class="qbtn" onclick="setQty(5,this)">×5</button>
-        <button class="qbtn" onclick="setQty(10,this)">×10</button>
+      <div class="qb" id="qtybtns">
+        <button class="qbtn on" data-q="1" onclick="setQty(1,this)">×1</button>
+        <button class="qbtn" data-q="3" onclick="setQty(3,this)">×3</button>
+        <button class="qbtn" data-q="5" onclick="setQty(5,this)">×5</button>
+        <button class="qbtn" data-q="10" onclick="setQty(10,this)">×10</button>
+        <button class="qbtn big" data-q="50" onclick="setQty(50,this)">×50</button>
+        <button class="qbtn big" data-q="100" onclick="setQty(100,this)">×100</button>
       </div>
       <button class="btn-open" id="bop" onclick="doOpen()">🔑 开箱</button>
       <div>
         <div class="ct" id="ctxt"></div>
         <div class="ct" id="ev-txt" style="margin-top:2px"></div>
+        <div class="ct" id="qty-hint" style="margin-top:2px;color:var(--accent)"></div>
       </div>
     </div>
   </div>
@@ -339,7 +366,7 @@ nav{display:flex;gap:2px;padding:0 22px;background:var(--s1);border-bottom:1px s
   </div>
   <div class="rp" id="rp">
     <div class="rc" id="rc">
-      <img id="ri" src=""/>
+      <img id="ri" src="" alt="开出物品"/>
       <div class="rn" id="rn"></div>
       <div class="rr" id="rr"></div>
       <div class="rw" id="rw"></div>
@@ -347,19 +374,21 @@ nav{display:flex;gap:2px;padding:0 22px;background:var(--s1);border-bottom:1px s
       <div class="rprice" id="rprice"></div>
       <div class="rprice-sub" id="rprice-sub"></div>
     </div>
+    <div class="ct" id="rcase" style="text-align:center"></div>
     <div class="ra">
       <button class="bsell" id="bs1" onclick="sell1()">💰 卖出</button>
-      <button class="bagain" onclick="again()">🔑 再开一次</button>
+      <button class="bagain" id="bagain-s" onclick="again()">🔑 再开一次</button>
       <button class="bclose" onclick="closeSpin()">关闭</button>
     </div>
   </div>
   <div class="mp" id="mpanel">
-    <div class="mhdr">开箱结果</div>
+    <div class="mhdr" id="mhdr">开箱结果</div>
+    <div class="msum" id="msum"></div>
     <div class="mg" id="mgrid"></div>
     <div class="mtotal" id="mtot"></div>
     <div class="ra">
-      <button class="bsell" onclick="sellAll()">💰 全部卖出</button>
-      <button class="bagain" onclick="again()">🔑 再开一次</button>
+      <button class="bsell" id="bsall" onclick="sellAll()">💰 全部卖出</button>
+      <button class="bagain" id="bagain-m" onclick="again()">🔑 再开一次</button>
       <button class="bclose" onclick="closeSpin()">关闭</button>
     </div>
   </div>
@@ -380,7 +409,7 @@ const OFFICIAL_RATES = {
     covert:     0.0064,
     gold:       0.0026,   // 刀/手套
   },
-  // Souvenir 包（5倍稀有）
+  // 纪念品包（不含 ★ 刀/手套，稀有度整体更低）
   souvenir: {
     consumer:   0.800,
     industrial: 0.160,
@@ -394,15 +423,16 @@ const OFFICIAL_RATES = {
 };
 
 // ══════════════════════════════════════════════
-//  磨损概率分布（Valve 官方 float 权重）
+//  磨损概率分布 + 游戏内真实 float 区间（WW 0.45~0.60，BS 0.60~1.00）
 // ══════════════════════════════════════════════
 const WEAR_DIST = [
-  { name: 'Factory New',    weight: 0.03, floatMin: 0.00, floatMax: 0.07 },
-  { name: 'Minimal Wear',   weight: 0.24, floatMin: 0.07, floatMax: 0.15 },
-  { name: 'Field-Tested',   weight: 0.33, floatMin: 0.15, floatMax: 0.38 },
-  { name: 'Well-Worn',      weight: 0.24, floatMin: 0.38, floatMax: 0.45 },
-  { name: 'Battle-Scarred', weight: 0.16, floatMin: 0.45, floatMax: 1.00 },
+  { name: 'Factory New',    cn:'崭新出厂', weight: 0.03, floatMin: 0.00, floatMax: 0.07 },
+  { name: 'Minimal Wear',   cn:'略有磨损', weight: 0.24, floatMin: 0.07, floatMax: 0.15 },
+  { name: 'Field-Tested',   cn:'久经沙场', weight: 0.33, floatMin: 0.15, floatMax: 0.38 },
+  { name: 'Well-Worn',      cn:'破损不堪', weight: 0.24, floatMin: 0.45, floatMax: 0.60 },
+  { name: 'Battle-Scarred', cn:'战痕累累', weight: 0.16, floatMin: 0.60, floatMax: 1.00 },
 ];
+const WEAR_CN = Object.fromEntries(WEAR_DIST.map(w => [w.name, w.cn]));
 
 // 磨损倍率（越新越贵）
 const WEAR_MULT = { 'Factory New': 2.5, 'Minimal Wear': 1.4, 'Field-Tested': 1.0, 'Well-Worn': 0.65, 'Battle-Scarred': 0.4 };
@@ -471,22 +501,38 @@ const SKIN_BASE_PRICE = {
   classified: { min: 5.00, max: 200.0 },
   covert:     { min: 30.0, max: 800.0 },
   gold:       { min: 80.0, max: 5000.0}, // 刀/手套
+  contraband: { min: 3000.0, max: 60000.0 }, // 违禁品（如 Howl）
 };
 
 // ══════════════════════════════════════════════
-//  稀有度映射
+//  稀有度映射（id 取自 CSGO-API；rarity_ancient = 刀/手套的 ★ 非凡级）
 // ══════════════════════════════════════════════
 const RARITY = {
-  rarity_consumer_weapon:  {l:'Consumer Grade', c:'#b0c3d9',k:'consumer'},
-  rarity_common:           {l:'Consumer Grade', c:'#b0c3d9',k:'consumer'},
-  rarity_uncommon_weapon:  {l:'Industrial Grade',c:'#5e98d9',k:'industrial'},
-  rarity_rare_weapon:      {l:'Mil-Spec Grade', c:'#4b69ff',k:'milspec'},
-  rarity_mythical_weapon:  {l:'Restricted',     c:'#8847ff',k:'restricted'},
-  rarity_legendary_weapon: {l:'Classified',     c:'#d32ce6',k:'classified'},
-  rarity_ancient_weapon:   {l:'Covert',         c:'#eb4b4b',k:'covert'},
-  rarity_ancient:          {l:'Covert',         c:'#eb4b4b',k:'covert'},
-  rarity_contraband:       {l:'Contraband',     c:'#e4ae39',k:'gold'},
+  rarity_common:           {l:'Consumer Grade', cn:'消费级',     c:'#b0c3d9',k:'consumer'},
+  rarity_consumer_weapon:  {l:'Consumer Grade', cn:'消费级',     c:'#b0c3d9',k:'consumer'},
+  rarity_uncommon:         {l:'Industrial Grade',cn:'工业级',    c:'#5e98d9',k:'industrial'},
+  rarity_uncommon_weapon:  {l:'Industrial Grade',cn:'工业级',    c:'#5e98d9',k:'industrial'},
+  rarity_rare:             {l:'Mil-Spec Grade', cn:'军规级',     c:'#4b69ff',k:'milspec'},
+  rarity_rare_weapon:      {l:'Mil-Spec Grade', cn:'军规级',     c:'#4b69ff',k:'milspec'},
+  rarity_mythical:         {l:'Restricted',     cn:'受限级',     c:'#8847ff',k:'restricted'},
+  rarity_mythical_weapon:  {l:'Restricted',     cn:'受限级',     c:'#8847ff',k:'restricted'},
+  rarity_legendary:        {l:'Classified',     cn:'保密级',     c:'#d32ce6',k:'classified'},
+  rarity_legendary_weapon: {l:'Classified',     cn:'保密级',     c:'#d32ce6',k:'classified'},
+  rarity_ancient_weapon:   {l:'Covert',         cn:'隐秘级',     c:'#eb4b4b',k:'covert'},
+  rarity_ancient:          {l:'★ Extraordinary',cn:'★ 非凡级（刀/手套）', c:'#e4ae39',k:'gold'},
+  rarity_contraband:       {l:'Contraband',     cn:'违禁品',     c:'#e4ae39',k:'contraband'},
 };
+const GOLD_RARITY = {l:'★ Extraordinary', cn:'非凡级（刀/手套）', c:'#e4ae39', k:'gold'};
+
+// 箱子类型中文名（数据源里是英文，界面直接显示会中英混杂）
+const TYPE_CN = {
+  Case:'武器箱', 'Weapon Case':'武器箱', Souvenir:'纪念品包', Package:'纪念品包',
+  Capsule:'胶囊', 'Sticker Capsule':'贴纸胶囊', 'Music Kit':'音乐盒', Tool:'工具',
+  Gift:'礼物', Normal:'普通', Pin:'徽章', Graffiti:'涂鸦',
+};
+const typeCn = t => TYPE_CN[t] || t || '其他';
+// 只有武器箱需要额外买钥匙；纪念品包 / 胶囊 / 贴纸包都不需要
+const needsKey = c => /case\b/i.test((c && c.type) || '');
 
 // ══════════════════════════════════════════════
 //  数据源（jsDelivr 多节点）
@@ -508,6 +554,8 @@ let opens = +localStorage.getItem('v_opens') || 0;
 
 let allCases=[], allSkins=[];
 let curCase=null, qty=1;
+const QTY_LIST = [1,3,5,10,50,100]; // 可选连开数量
+const BIG_PULL = 30;                 // 超过该数量走批量结算面板
 let lastItem=null, lastMulti=null;
 let cTypeF='all', rarF='all', invF='all';
 let skOff=0, skFiltered=[];
@@ -520,13 +568,26 @@ const priceCache = {};
 //  UTILS
 // ══════════════════════════════════════════════
 const $=id=>document.getElementById(id);
-const fmt=n=>'$'+Math.abs(parseFloat(n)).toFixed(2);
-const fmtS=n=>'¥'+Math.abs(parseFloat(n)*7.2).toFixed(0); // 人民币参考
+const CNY_RATE = 7.2; // 人民币参考汇率（仅用于展示）
+// 千分位 + 保留正负号（旧版用 Math.abs，导致亏损显示成正数）
+function money(n, dec=2){
+  const v = Math.abs(parseFloat(n)||0);
+  return v.toLocaleString('en-US',{minimumFractionDigits:dec,maximumFractionDigits:dec});
+}
+const esc = s => String(s ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+const fmt  = n => '$' + money(n);
+const fmtSgn = n => (parseFloat(n) < 0 ? '-$' : '+$') + money(n); // 带符号（盈亏）
+const cny  = n => '¥' + Math.round(Math.abs(parseFloat(n)||0) * CNY_RATE).toLocaleString('en-US');
 function save(){
-  localStorage.setItem('v_bal',bal.toFixed(2));
-  localStorage.setItem('v_inv',JSON.stringify(inv));
-  localStorage.setItem('v_hist',JSON.stringify(hist));
-  localStorage.setItem('v_opens',opens);
+  // 100 连开会迅速膨胀，背包最多保留最近 800 件，避免 localStorage 超限
+  if (inv.length > 800) inv.length = 800;
+  if (hist.length > 400) hist.length = 400;
+  try {
+    localStorage.setItem('v_bal',bal.toFixed(2));
+    localStorage.setItem('v_inv',JSON.stringify(inv));
+    localStorage.setItem('v_hist',JSON.stringify(hist));
+    localStorage.setItem('v_opens',opens);
+  } catch(e) { console.warn('保存失败:', e.message); }
 }
 function updateBal(){$('bal').textContent=fmt(bal)}
 function toast(msg,type=''){
@@ -534,7 +595,7 @@ function toast(msg,type=''){
   t.className='toast on'+(type?' '+type:'');
   clearTimeout(t._t);t._t=setTimeout(()=>t.className='toast',3000);
 }
-function topUp(){bal+=100;save();updateBal();toast('+$100.00 充值成功','ok')}
+function topUp(amt=100){bal+=amt;save();updateBal();toast(`充值成功 +${fmt(amt)}，当前余额 ${fmt(bal)}`,'ok')}
 function goPage(id,el){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
   document.querySelectorAll('.nt').forEach(n=>n.classList.remove('on'));
@@ -542,26 +603,42 @@ function goPage(id,el){
   if(id==='inv')renderInv();
   if(id==='hist')renderHist();
 }
-function rar(item){return RARITY[item?.rarity?.id]||{l:'',c:'#555',k:'consumer'}}
+// 兜底：数据源里出现未知稀有度时不能显示成空白
+function rar(item){
+  const r = RARITY[item?.rarity?.id];
+  if (r) return r;
+  const n = item?.rarity?.name;
+  return n ? {l:n, cn:n, c:item.rarity.color||'#9aa0b8', k:'milspec'} : {l:'未知稀有度', cn:'未知', c:'#9aa0b8', k:'milspec'};
+}
 
 // ══════════════════════════════════════════════
 //  价格计算（基于真实市场数据）
 // ══════════════════════════════════════════════
+// 皮肤估价：同一 (皮肤, 磨损) 必须永远得到同一个价格，否则箱内列表、
+// 弹窗 EV 和开箱结果三处的数字会互相打架（旧版写了缓存读取却从不写入）。
+function hashStr(s) {
+  let h = 2166136261;
+  for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); }
+  return h >>> 0;
+}
+function rand01(seed) { // mulberry32，用名字做种子 → 刷新页面价格也不变
+  let t = (seed + 0x6D2B79F5) | 0;
+  t = Math.imul(t ^ (t >>> 15), t | 1);
+  t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+  return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+}
 function getSkinPrice(name, rarKey, wear) {
-  // 优先从 priceCache 取动态价格
-  const wearSuffix = wear ? ` (${wear})` : '';
-  const key = name + wearSuffix;
+  const key = (name || '') + (wear ? ` (${wear})` : '');
   if (priceCache[key] !== undefined) return priceCache[key];
 
-  // 否则基于稀有度范围做随机估价（模拟真实价格分布）
-  const range = SKIN_BASE_PRICE[rarKey] || SKIN_BASE_PRICE.consumer;
+  const range = SKIN_BASE_PRICE[rarKey] || SKIN_BASE_PRICE.milspec;
   const mult = WEAR_MULT[wear] || 1;
-  // 使用对数均匀分布（市场价格呈对数正态分布）
-  const logMin = Math.log(range.min);
-  const logMax = Math.log(range.max);
-  const logPrice = logMin + Math.random() * (logMax - logMin);
-  const basePrice = Math.exp(logPrice);
-  return Math.round(basePrice * mult * 100) / 100;
+  // 对数均匀分布（市场价格近似对数正态）
+  const logMin = Math.log(range.min), logMax = Math.log(range.max);
+  const basePrice = Math.exp(logMin + rand01(hashStr(key)) * (logMax - logMin));
+  const v = Math.round(basePrice * mult * 100) / 100;
+  priceCache[key] = v;
+  return v;
 }
 
 function getCasePrice(c) {
@@ -570,56 +647,62 @@ function getCasePrice(c) {
   const p = CASE_PRICES[c.name];
   if (p !== undefined) return p;
   // 否则按类型估算
-  if (c.type === 'Souvenir') return 2.00;
+  const t = c.type || '';
+  if (t === 'Souvenir' || t === 'Package') return 2.00;
+  if (/capsule/i.test(t)) return 0.30; // 贴纸/胶囊包，无钥匙，便宜
   return 0.50; // 旧箱子默认便宜
 }
 
 function getCaseOpenCost(c) {
-  // 开箱费 = 箱子价格 + 钥匙价格
+  // 开箱费 = 箱子价格（+ 钥匙价格，纪念品包/胶囊无需钥匙）
   const caseP = getCasePrice(c);
-  if (c.type === 'Souvenir') return caseP; // souvenir 不需要钥匙
-  return caseP + KEY_PRICE;
+  return needsKey(c) ? caseP + KEY_PRICE : caseP;
+}
+
+// 2013/09/20 → 2013-09-20
+function fmtDate(s) {
+  if (!s) return '—';
+  const m = String(s).match(/(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})/);
+  return m ? `${m[1]}-${m[2].padStart(2,'0')}-${m[3].padStart(2,'0')}` : String(s);
+}
+
+// 稀有度分组 + 按箱内实际存在的档位归一化权重（roll / EV / 爆率展示共用，保证三者一致）
+function isSouvenirType(c) { return c?.type === 'Souvenir' || c?.type === 'Package'; }
+function tierWeights(c) {
+  const isSouvenir = isSouvenirType(c);
+  const rates = isSouvenir ? OFFICIAL_RATES.souvenir : OFFICIAL_RATES.case;
+  const byRarity = {};
+  (c?.contains || []).forEach(it => {
+    const k = rar(it).k === 'contraband' ? 'covert' : rar(it).k; // 违禁品占 Covert 槽位
+    (byRarity[k] = byRarity[k] || []).push(it);
+  });
+  const order = ['consumer','industrial','milspec','restricted','classified','covert'];
+  const tiers = order.map(k => ({k, items: byRarity[k] || [], r: rates[k] || 0})).filter(t => t.items.length);
+  const tot = tiers.reduce((s,t) => s + t.r, 0);
+  const rare = c?.contains_rare || [];
+  const goldRate = (!isSouvenir && rare.length) ? (rates.gold || 0) : 0;
+  // 每档真实落地概率（缺档时按比例摊分；贴纸胶囊等无权重档位走等概率）
+  tiers.forEach(t => {
+    t.p = (tot > 0 ? t.r / tot : 1 / tiers.length) * (1 - goldRate);
+  });
+  return {tiers, tot, goldRate, rare, rates, isSouvenir};
 }
 
 // 期望价值（EV）计算
 function calcEV(c) {
-  const pool = c.contains || [];
-  const rare = c.contains_rare || [];
-  const rates = OFFICIAL_RATES.case;
-
-  // 按稀有度分组
-  const byRarity = {};
-  pool.forEach(it => {
-    const k = rar(it).k;
-    if (!byRarity[k]) byRarity[k] = [];
-    byRarity[k].push(it);
-  });
-
+  const {tiers, goldRate, rare} = tierWeights(c);
+  if (!tiers.length) return 0;
   let ev = 0;
-  const rarOrder = ['milspec','restricted','classified','covert'];
-  rarOrder.forEach(k => {
-    const items = byRarity[k] || [];
-    if (!items.length) return;
-    const rate = rates[k] || 0;
-    // 每个稀有度内物品等概率
-    items.forEach(it => {
-      const itemRate = rate / items.length;
-      // 按磨损分布计算期望
-      WEAR_DIST.forEach(w => {
-        const p = getSkinPrice(it.name, k, w.name);
-        ev += itemRate * w.weight * p;
-      });
+  tiers.forEach(t => {
+    t.items.forEach(it => {
+      const pk = rar(it).k; // 用物品自身稀有度定价（违禁品 ≠ 普通 Covert）
+      WEAR_DIST.forEach(w => { ev += t.p * w.weight * getSkinPrice(it.name, pk, w.name); });
     });
   });
-  // 刀/手套期望
-  if (rare.length > 0) {
-    const goldRate = rates.gold || 0;
+  if (goldRate > 0 && rare.length) {
     rare.forEach(it => {
       const itemRate = goldRate / rare.length;
-      WEAR_DIST.forEach(w => {
-        const p = getSkinPrice(it.name, 'gold', w.name);
-        ev += itemRate * w.weight * p;
-      });
+      WEAR_DIST.forEach(w => { ev += itemRate * w.weight * getSkinPrice(it.name, 'gold', w.name); });
     });
   }
   return Math.round(ev * 100) / 100;
@@ -642,50 +725,22 @@ function rollWear() {
 //  开箱主逻辑（严格按官方爆率）
 // ══════════════════════════════════════════════
 function roll(c) {
-  const pool = [...(c.contains || [])];
-  const rare = [...(c.contains_rare || [])];
-  const isSouvenir = c.type === 'Souvenir';
-  const rates = isSouvenir ? OFFICIAL_RATES.souvenir : OFFICIAL_RATES.case;
+  const pick = arr => arr[Math.floor(Math.random() * arr.length)];
+  const {tiers, goldRate, rare, isSouvenir} = tierWeights(c);
 
-  // 按稀有度分组
-  const byRarity = { consumer:[], industrial:[], milspec:[], restricted:[], classified:[], covert:[] };
-  pool.forEach(it => {
-    const k = rar(it).k;
-    if (byRarity[k]) byRarity[k].push(it);
-    else byRarity.milspec.push(it); // 兜底
-  });
-
-  // 投掷随机数决定稀有度
-  const r = Math.random();
   let chosen = null, rarKey = 'milspec', isRare = false;
 
-  if (!isSouvenir && rare.length > 0 && r < rates.gold) {
-    // 刀/手套
-    chosen = rare[Math.floor(Math.random() * rare.length)];
+  // ★ 刀/手套（纪念品包没有）
+  if (goldRate > 0 && Math.random() < goldRate) {
+    chosen = pick(rare);
     rarKey = 'gold'; isRare = true;
-  } else {
-    // 计算累计概率（从高稀有度开始）
-    const order = isSouvenir
-      ? [['classified',rates.classified],['restricted',rates.restricted],['milspec',rates.milspec],['industrial',rates.industrial],['consumer',rates.consumer]]
-      : [['covert',rates.covert],['classified',rates.classified],['restricted',rates.restricted],['milspec',rates.milspec]];
-
-    let cum = isSouvenir ? 0 : rates.gold;
-    for (const [k, rate] of order) {
-      cum += rate;
-      const pool2 = byRarity[k];
-      if (r < cum && pool2 && pool2.length > 0) {
-        chosen = pool2[Math.floor(Math.random() * pool2.length)];
-        rarKey = k; break;
-      }
-    }
-    // 兜底：取最低稀有度有货的
-    if (!chosen) {
-      const fallback = ['milspec','industrial','consumer','restricted','classified','covert'];
-      for (const k of fallback) {
-        if (byRarity[k]?.length) { chosen = byRarity[k][0]; rarKey = k; break; }
-      }
-    }
+  } else if (tiers.length) {
+    const tot = tiers.reduce((s,t) => s + t.p, 0) || 1;
+    let x = Math.random() * tot;
+    for (const t of tiers) { x -= t.p; if (x <= 0) { chosen = pick(t.items); rarKey = t.k; break; } }
+    if (!chosen) { const t = tiers[tiers.length-1]; chosen = pick(t.items); rarKey = t.k; }
   }
+  if (!chosen) chosen = {name:'未知物品', image:''}; // 空箱兜底，避免渲染出 undefined
 
   // StatTrak（10% 独立概率）
   const hasStatTrak = !isRare && !isSouvenir && Math.random() < OFFICIAL_RATES.stattrak && chosen?.name;
@@ -698,13 +753,24 @@ function roll(c) {
 
   return {
     ...chosen,
-    wear: wear.name, flt: floatVal,
-    r: r2, rarKey: skinKey,
+    name: chosen?.name || '未知物品',
+    wear: wear.name, wearCn: wear.cn, flt: floatVal,
+    r: isRare ? GOLD_RARITY : r2, rarKey: skinKey,
     isRare, isSouvenir,
     stattrak: hasStatTrak,
     p: Math.round(stPrice * 100) / 100,
     _uid: Date.now() + Math.random().toString(36).slice(2),
   };
+}
+
+// 磨损中文名（旧存档里只有英文，做一次兜底映射）
+const wearCn = it => it?.wearCn || WEAR_CN[it?.wear] || it?.wear || '';
+// 显示用名称：StatTrak™ / Souvenir 前缀（卡片空间小，用 ST™ 缩写）
+function displayName(it, short=false) {
+  const base = it?.name || '未知物品';
+  if (it?.stattrak) return (short ? 'ST™ ' : 'StatTrak™ ') + base;
+  if (it?.isSouvenir) return (short ? 'Souv. ' : 'Souvenir ') + base;
+  return base;
 }
 
 // ══════════════════════════════════════════════
@@ -734,13 +800,14 @@ async function load() {
       fetchFallback('/crates.json'),
       fetchFallback('/skins.json'),
     ]);
-    allCases = crates.filter(c => c.contains?.length > 0 && ['Case','Souvenir','Capsule','Package'].includes(c.type));
+    allCases = crates.filter(c =>
+      (c.contains?.length || 0) > 0 && /case|souvenir|capsule|package/i.test(c.type || ''));
     allSkins = skins;
-    setStatus('ok', `加载完成 · ${allCases.length} 个箱子 · ${allSkins.length} 个皮肤`, '价格来源: Steam Market 参考');
+    setStatus('ok', `加载完成 · ${allCases.length} 个武器箱/包 · ${allSkins.length} 个皮肤`, '价格来源：Steam Market 参考');
     buildTypeChips(); buildRarChips(); buildInvChips();
     renderCases(allCases); initSkins(allSkins);
   } catch(e) {
-    setStatus('err', '加载失败: ' + e.message);
+    setStatus('err', '数据加载失败：' + e.message);
     $('cw').innerHTML = `<div style="color:var(--danger);padding:50px;text-align:center;line-height:2.2">
       ⚠️ 数据加载失败<br><small>${e.message}</small><br><br>
       <b>国内用户：</b>请开启代理后刷新<br>
@@ -753,38 +820,50 @@ async function load() {
 //  CASES PAGE
 // ══════════════════════════════════════════════
 function buildTypeChips() {
-  const types = ['全部','Case','Souvenir','Capsule'];
-  const w = $('tc');
-  types.forEach(t => {
-    const b = document.createElement('button'); b.className = 'chip' + (t==='全部'?' on':'');
-    b.textContent = t;
-    b.onclick = () => { cTypeF = t==='全部'?'all':t; w.querySelectorAll('.chip').forEach(x=>x.classList.remove('on')); b.classList.add('on'); filterCases(); };
+  // 按数据源里真实存在的类型生成筛选项（原来写死的 Capsule 永远匹配不到 Sticker Capsule）
+  const seen = {};
+  allCases.forEach(c => { const t = c.type || '其他'; seen[t] = (seen[t]||0)+1; });
+  const order = Object.keys(seen).sort((a,b) => seen[b]-seen[a]);
+  const w = $('tc'); w.innerHTML = '';
+  const mk = (label, val, n) => {
+    const b = document.createElement('button'); b.className = 'chip' + (val==='all'?' on':'');
+    b.textContent = n ? `${label} ${n}` : label;
+    b.dataset.t = val;
+    b.onclick = () => { cTypeF = val; w.querySelectorAll('.chip').forEach(x=>x.classList.remove('on')); b.classList.add('on'); filterCases(); };
     w.appendChild(b);
-  });
+  };
+  mk('全部', 'all', allCases.length);
+  order.forEach(t => mk(typeCn(t), t, seen[t]));
 }
 function filterCases() {
-  const q = $('cq').value.toLowerCase();
-  renderCases(allCases.filter(c => c.name.toLowerCase().includes(q) && (cTypeF==='all' || c.type===cTypeF)));
+  const q = $('cq').value.trim().toLowerCase();
+  renderCases(allCases.filter(c => {
+    const nameHit = (c.name||'').toLowerCase().includes(q) || (c.market_hash_name||'').toLowerCase().includes(q);
+    return nameHit && (cTypeF==='all' || c.type===cTypeF);
+  }));
 }
 function renderCases(list) {
   const w = $('cw');
-  if (!list.length) { w.innerHTML = '<div style="color:var(--muted);padding:50px;text-align:center">无匹配结果</div>'; return; }
+  $('pcount').textContent = allCases.length ? `当前显示 ${list.length} / ${allCases.length} 个` : '';
+  if (!list.length) { w.innerHTML = `<div style="color:var(--muted);padding:50px;text-align:center">${allCases.length?'没有匹配的武器箱，换个关键词试试':'暂无数据，请刷新页面重新加载数据源'}</div>`; return; }
   const g = document.createElement('div'); g.className = 'cg';
   list.forEach(c => {
     const caseP = getCasePrice(c);
     const openCost = getCaseOpenCost(c);
     const ev = calcEV(c);
     const roi = ev - openCost;
-    const roiPct = openCost > 0 ? ((roi / openCost) * 100).toFixed(1) : '0';
-    const evSign = roi >= 0 ? '+' : '';
+    const roiPct = openCost > 0 ? ((roi / openCost) * 100).toFixed(1) : '0.0';
+    const keyNote = needsKey(c) ? `箱 ${fmt(caseP)} + 钥匙 ${fmt(KEY_PRICE)}` : `箱 ${fmt(caseP)} · 无需钥匙`;
+    const rareN = (c.contains_rare||[]).length;
 
     const d = document.createElement('div'); d.className = 'cc';
     d.innerHTML = `
-      ${c.type ? `<div class="cc-badge">${c.type}</div>` : ''}
-      <img src="${c.image}" loading="lazy" onerror="this.src='${IMG_FB}'"/>
-      <div class="cc-name">${c.name}</div>
-      <div class="cc-price">${fmt(caseP)} <span style="font-size:10px;color:var(--muted)">+钥匙${fmt(KEY_PRICE)}</span></div>
-      <div class="cc-ev ${roi>=0?'pos':'neg'}">${evSign}${fmt(roi)} ROI (${evSign}${roiPct}%)</div>`;
+      <div class="cc-badge">${typeCn(c.type)}${rareN?` · ★${rareN}`:''}</div>
+      <img src="${c.image}" loading="lazy" onerror="this.src='${IMG_FB}'" alt="${esc(c.name)}"/>
+      <div class="cc-name">${esc(c.name)}</div>
+      <div class="cc-price">${fmt(openCost)} <span style="font-size:10px;color:var(--muted)">/ 次</span></div>
+      <div style="font-size:9px;color:var(--muted);margin-top:2px">${keyNote}</div>
+      <div class="cc-ev ${roi>=0?'pos':'neg'}">期望盈亏 ${fmtSgn(roi)}（${(+roiPct>=0?'+':'')}${roiPct}% ROI）</div>`;
     d.onclick = () => openModal(c);
     g.appendChild(d);
   });
@@ -794,37 +873,54 @@ function renderCases(list) {
 // ══════════════════════════════════════════════
 //  MODAL
 // ══════════════════════════════════════════════
-function openModal(c) {
-  curCase = c; qty = 1;
-  document.querySelectorAll('.qbtn').forEach((b,i) => b.classList.toggle('on', i===0));
+// 概率文字：大数 2 位小数，小概率补到 3 位（避免 0.026% 被四舍五入成 0.03%）
+function pctTxt(r) {
+  const v = (r||0) * 100;
+  let s = v >= 1 ? v.toFixed(2) : v.toFixed(3);
+  return s.replace(/0+$/,'').replace(/\.$/,'') + '%';
+}
+const ODDS_TIER = [
+  {k:'consumer',  l:'Consumer',   cn:'消费级', c:'#b0c3d9'},
+  {k:'industrial',l:'Industrial', cn:'工业级', c:'#5e98d9'},
+  {k:'milspec',   l:'Mil-Spec',   cn:'军规级', c:'#4b69ff'},
+  {k:'restricted',l:'Restricted', cn:'受限级', c:'#8847ff'},
+  {k:'classified',l:'Classified', cn:'保密级', c:'#d32ce6'},
+  {k:'covert',    l:'Covert',     cn:'隐秘级', c:'#eb4b4b'},
+];
+
+function openModal(c, keepQty) {
+  curCase = c;
+  qty = keepQty && QTY_LIST.includes(keepQty) ? keepQty : 1;
+  markQtyBtn();
   $('mci').src = c.image;
   $('mct').textContent = c.name;
 
+  $('mci').alt = c.name;
   const caseP = getCasePrice(c);
   const openCost = getCaseOpenCost(c);
   const ev = calcEV(c);
   const roi = ev - openCost;
+  const roiPct = openCost > 0 ? (roi / openCost) * 100 : 0;
+  const {tiers, goldRate} = tierWeights(c);
+  const byK = {}; tiers.forEach(t => byK[t.k] = t);
+  const rareN = (c.contains_rare||[]).length;
 
   $('mcs').innerHTML = `
-    类型 <span>${c.type||'—'}</span> &nbsp;·&nbsp; 首发 <span>${c.first_sale_date||'—'}</span><br>
-    箱子价格 <span>${fmt(caseP)}</span> &nbsp;·&nbsp; 钥匙 <span>${c.type==='Souvenir'?'无需':''+fmt(KEY_PRICE)}</span> &nbsp;·&nbsp; 开箱总费用 <span>${fmt(openCost)}</span><br>
-    期望价值 <span>${fmt(ev)}</span> &nbsp;·&nbsp; 期望收益 <span style="color:${roi>=0?'var(--ok)':'var(--danger)'}">
-      ${roi>=0?'+':''}${fmt(roi)} (${roi>=0?'+':''}${((roi/openCost)*100).toFixed(1)}%)</span>`;
+    类型 <span>${typeCn(c.type)}</span> &nbsp;·&nbsp; 首发 <span>${fmtDate(c.first_sale_date)}</span>
+    ${rareN?` &nbsp;·&nbsp; ★ 特殊物品 <span>${rareN} 件</span>`:' &nbsp;·&nbsp; ★ 特殊物品 <span>无</span>'}<br>
+    箱子价格 <span>${fmt(caseP)}</span> &nbsp;·&nbsp; 钥匙 <span>${needsKey(c)?fmt(KEY_PRICE):'无需'}</span>
+    &nbsp;·&nbsp; 单次开箱 <span>${fmt(openCost)}</span><br>
+    期望回收 <span>${fmt(ev)}</span> &nbsp;·&nbsp; 期望盈亏 <span style="color:${roi>=0?'var(--ok)':'var(--danger)'}">
+      ${fmtSgn(roi)}（${roiPct>=0?'+':''}${roiPct.toFixed(1)}% ROI）</span>`;
 
-  // 爆率标签（根据类型选择）
-  const isSouvenir = c.type === 'Souvenir';
-  const oddData = isSouvenir ? [
-    {c:'#b0c3d9',l:'Consumer',p:'80%'},{c:'#5e98d9',l:'Industrial',p:'16%'},
-    {c:'#4b69ff',l:'Mil-Spec',p:'3.2%'},{c:'#8847ff',l:'Restricted',p:'0.64%'},
-    {c:'#d32ce6',l:'Classified',p:'0.128%'},{c:'#eb4b4b',l:'Covert',p:'0.026%'},
-  ] : [
-    {c:'#4b69ff',l:'Mil-Spec',p:'79.92%'},{c:'#8847ff',l:'Restricted',p:'15.98%'},
-    {c:'#d32ce6',l:'Classified',p:'3.20%'},{c:'#eb4b4b',l:'Covert',p:'0.64%'},
-    {c:'#e4ae39',l:'★刀/手套',p:'0.26%'},
-  ];
+  // 爆率标签：直接读开箱引擎用的那份权重，保证「显示的爆率 = 实际爆率」
+  let oddData = [...ODDS_TIER].reverse().filter(t => byK[t.k])
+    .map(t => ({c:t.c, l:`${t.cn} ${t.l}`, p:`${pctTxt(byK[t.k].p)} · ${byK[t.k].items.length} 件`}));
+  if (goldRate > 0) oddData.push({c:'#e4ae39', l:'★ 刀/手套', p:`${pctTxt(goldRate)} · ${rareN} 件`});
+  if (!oddData.length) oddData = [{c:'#9aa0b8', l:'该箱无可抽取物品', p:'—'}];
   $('modal-odds').innerHTML = oddData.map(o =>
     `<div class="odd-tag" style="border-color:${o.c}40;color:${o.c}">
-      <div style="width:6px;height:6px;border-radius:50%;background:${o.c}"></div>${o.l}: ${o.p}
+      <div style="width:6px;height:6px;border-radius:50%;background:${o.c}"></div>${o.l}：${o.p}
     </div>`
   ).join('');
 
@@ -834,25 +930,25 @@ function openModal(c) {
     const r = rar(it);
     const ftPrice = getSkinPrice(it.name, r.k, 'Field-Tested');
     const d = document.createElement('div'); d.className = 'it';
-    d.innerHTML = `<img src="${it.image}" loading="lazy" onerror="this.src='${IMG_FB}'"/>
-      <div class="tn">${it.name}</div>
-      <div class="tp" style="color:${r.c}">${r.l}</div>
-      <div class="tp" style="color:var(--ok)">${fmt(ftPrice)}</div>
+    d.innerHTML = `<img src="${it.image}" loading="lazy" onerror="this.src='${IMG_FB}'" alt="${esc(it.name)}"/>
+      <div class="tn">${esc(it.name)}</div>
+      <div class="tp" style="color:${r.c}">${r.cn || r.l}</div>
+      <div class="tp" style="color:var(--ok)">${fmt(ftPrice)} <span style="font-size:8px;color:var(--muted)">久经沙场</span></div>
       <div class="tb" style="background:${r.c}"></div>`;
     ig.appendChild(d);
   });
-  $('items-count').textContent = `(${(c.contains||[]).length} 件)`;
+  $('items-count').textContent = `（${(c.contains||[]).length} 件常规${rareN ? ` · ${rareN} 件 ★` : ''}）`;
 
   // 稀有物品
   const rg = $('mir'), rl = $('rlt'); rg.innerHTML = '';
   if (c.contains_rare?.length) {
     rl.style.display = '';
-    rl.textContent = `★ 稀有特殊物品（${(c.contains_rare||[]).length} 把刀/手套，0.26%）`;
+    rl.textContent = `★ 稀有特殊物品（${c.contains_rare.length} 件刀/手套 · 合计 ${pctTxt(goldRate)} · 单件约 ${pctTxt(goldRate / c.contains_rare.length)}）`;
     c.contains_rare.forEach(it => {
       const avgP = getSkinPrice(it.name, 'gold', 'Field-Tested');
       const d = document.createElement('div'); d.className = 'it';
-      d.innerHTML = `<img src="${it.image}" loading="lazy" onerror="this.src='${IMG_FB}'"/>
-        <div class="tn" style="color:#e4ae39">${it.name}</div>
+      d.innerHTML = `<img src="${it.image}" loading="lazy" onerror="this.src='${IMG_FB}'" alt="${esc(it.name)}"/>
+        <div class="tn" style="color:#e4ae39">${esc(it.name)}</div>
         <div class="tp" style="color:var(--ok)">${fmt(avgP)}</div>
         <div class="tb" style="background:#e4ae39"></div>`;
       rg.appendChild(d);
@@ -864,27 +960,39 @@ function openModal(c) {
 }
 function closeModal() { $('cmo').classList.remove('on'); }
 $('cmo').onclick = e => { if (e.target === $('cmo')) closeModal(); };
-function setQty(n, b) {
-  qty = n;
-  document.querySelectorAll('.qbtn').forEach(x => x.classList.remove('on'));
-  b.classList.add('on'); updateCost();
+function markQtyBtn() {
+  document.querySelectorAll('#qtybtns .qbtn').forEach(b => b.classList.toggle('on', +b.dataset.q === qty));
+}
+function setQty(n) {
+  qty = QTY_LIST.includes(n) ? n : 1;
+  markQtyBtn(); updateCost();
 }
 function updateCost() {
-  const cost = getCaseOpenCost(curCase) * qty;
-  $('ctxt').textContent = `本次花费: ${fmt(cost)}（×${qty}）`;
-  $('bop').textContent = `🔑 开箱 ×${qty}`;
+  if (!curCase) return;
+  const unit = getCaseOpenCost(curCase);
+  const cost = unit * qty;
   const ev = calcEV(curCase);
-  const roi = (ev - getCaseOpenCost(curCase)) * qty;
-  $('ev-txt').textContent = `期望总收益: ${roi>=0?'+':''}${fmt(roi)}`;
+  const roi = (ev - unit) * qty;
+  const lack = cost - bal;
+  $('ctxt').innerHTML = `本次花费 <b style="color:${lack>0?'var(--danger)':'var(--txt)'}">${fmt(cost)}</b>`
+    + `<span style="color:var(--muted)">（${fmt(unit)} × ${qty}）</span>`
+    + (lack > 0 ? `<span style="color:var(--danger)"> · 余额还差 ${fmt(lack)}</span>` : '');
+  $('bop').textContent = qty > 1 ? `🔑 开箱 ×${qty}` : '🔑 开箱 1 次';
+  $('ev-txt').textContent = `${qty > 1 ? `×${qty} 期望总盈亏` : '期望盈亏'}：${fmtSgn(roi)}`;
   $('ev-txt').style.color = roi >= 0 ? 'var(--ok)' : 'var(--danger)';
+  $('qty-hint').textContent = qty > 1 ? '批量开箱：跳过滚轮动画，结果直接存入背包' : '';
 }
 
 // ══════════════════════════════════════════════
 //  OPEN
 // ══════════════════════════════════════════════
 function doOpen() {
+  if (!curCase) { toast('请先选择一个武器箱','err'); return; }
   const cost = getCaseOpenCost(curCase) * qty;
-  if (bal < cost) { toast('余额不足，请充值！','err'); return; }
+  if (bal < cost) {
+    toast(`余额不足 ${fmt(cost)}，还差 ${fmt(cost-bal)}，请先充值`, 'err');
+    updateCost(); return;
+  }
   bal -= cost; opens += qty; save(); updateBal(); closeModal();
   qty === 1 ? spinSingle() : multiOpen();
 }
@@ -899,9 +1007,8 @@ function spinSingle() {
   const IW = 136;
   items.forEach(it => {
     const d = document.createElement('div'); d.className = 'sc'; d.style.borderColor = it.r.c;
-    const name = (it.stattrak ? 'ST™ ' : '') + it.name;
     d.innerHTML = `<img src="${it.image}" loading="lazy" onerror="this.src='${IMG_FB}'"/>
-      <div class="sn" style="color:${it.r.c}">${name}</div>`;
+      <div class="sn" style="color:${it.r.c}">${esc(displayName(it, true))}</div>`;
     track.appendChild(d);
   });
 
@@ -918,46 +1025,82 @@ function spinSingle() {
 
 function showSingle(item) {
   $('ri').src = item.image;
-  const fullName = (item.stattrak ? 'StatTrak™ ' : '') + item.name;
-  $('rn').textContent = fullName;
-  $('rr').textContent = item.r.l; $('rr').style.color = item.r.c;
-  $('rw').textContent = item.wear;
-  $('rf').textContent = `Float: ${item.flt}`;
+  $('rn').textContent = displayName(item);
+  $('rr').textContent = item.r.cn || item.r.l; $('rr').style.color = item.r.c;
+  $('rw').textContent = `${wearCn(item)} · ${item.wear}`;
+  $('rf').textContent = `Float ${item.flt}`;
   $('rprice').textContent = fmt(item.p);
-  $('rprice-sub').textContent = `≈ ¥${(item.p * 7.2).toFixed(0)} (人民币参考)`;
+  $('rprice-sub').textContent = `≈ ${cny(item.p)} 人民币参考`;
 
   const card = $('rc'); card.style.borderColor = item.r.c; card.style.color = item.r.c;
-  if (item.isRare || item.rarKey === 'covert') card.classList.add('knife-flash');
+  if (item.isRare || item.rarKey === 'covert' || item.rarKey === 'contraband') card.classList.add('knife-flash');
   else card.classList.remove('knife-flash');
 
+  const cost = getCaseOpenCost(curCase);
+  const delta = item.p - cost;
+  $('rcase').textContent = `来自 ${curCase?.name||'—'}（${fmt(cost)}）· 本次${delta>=0?'赚':'亏'} ${fmt(Math.abs(delta))}`;
+  $('slbl').textContent = '🎰 开箱完成';
   $('bs1').textContent = `💰 卖出 ${fmt(item.p)}`;
+  $('bagain-s').textContent = qty > 1 ? `🔑 再开 ×${qty}` : '🔑 再开一次';
   addInv(item); addHist(item); $('rp').classList.add('on');
 }
 
-function multiOpen() {
-  const results = []; for (let i = 0; i < qty; i++) results.push(roll(curCase));
-  lastMulti = results;
-  results.forEach(r => { addInv(r); addHist(r); }); save();
+// 稀有度展示信息（统计条 / 卡片共用）
+const TIER_INFO = {
+  consumer:  {n:'消费级',   c:'#b0c3d9'}, industrial: {n:'工业级', c:'#5e98d9'},
+  milspec:   {n:'军规级',   c:'#4b69ff'}, restricted: {n:'受限级', c:'#8847ff'},
+  classified:{n:'保密级',   c:'#d32ce6'}, covert:     {n:'隐秘级', c:'#eb4b4b'},
+  contraband:{n:'违禁品',   c:'#e4ae39'}, gold:       {n:'★ 刀/手套', c:'#e4ae39'},
+};
+const TIER_ORDER = ['contraband','gold','covert','classified','restricted','milspec','industrial','consumer'];
 
-  const g = $('mgrid'); g.innerHTML = '';
+function multiOpen() {
+  const n = qty;
+  const results = []; for (let i = 0; i < n; i++) results.push(roll(curCase));
+  lastMulti = results;
+  results.forEach(r => { addInv(r, true); addHist(r, true); }); save(); // 批量只落盘一次
+
+  const g = $('mgrid');
+  g.className = 'mg' + (n > BIG_PULL ? ' big' : '');
+  g.innerHTML = '';
+  // 逐张浮现的总时长控制在 2.2s 内，100 连开不用等 6 秒
+  const step = Math.max(6, Math.min(70, Math.floor(2200 / n)));
+  const bestP = results.reduce((m, r) => Math.max(m, r.p), 0);
+  const frag = document.createDocumentFragment();
   results.forEach((it, i) => {
-    const d = document.createElement('div'); d.className = 'mcard';
-    d.style.borderColor = it.r.c; d.style.animationDelay = (i * 60) + 'ms';
-    const name = (it.stattrak ? 'ST™ ' : '') + it.name;
-    d.innerHTML = `<img src="${it.image}" loading="lazy" onerror="this.src='${IMG_FB}'"/>
-      <div class="mc-n" style="color:${it.r.c}">${name}</div>
-      <div class="mc-w">${it.wear}</div>
+    const d = document.createElement('div');
+    d.className = 'mcard' + (it.p === bestP ? ' best' : '');
+    d.style.borderColor = it.r.c; d.style.animationDelay = (i * step) + 'ms';
+    d.innerHTML = `<img src="${it.image}" loading="lazy" decoding="async" onerror="this.src='${IMG_FB}'" alt="${esc(it.name)}"/>
+      <div class="mc-n" style="color:${it.r.c}">${esc(displayName(it, true))}</div>
+      <div class="mc-w">${esc(wearCn(it))}</div>
       <div class="mc-p">${fmt(it.p)}</div>`;
-    g.appendChild(d);
+    frag.appendChild(d);
   });
+  g.appendChild(frag); g.scrollTop = 0;
+
+  // 稀有度统计条
+  const cnt = {};
+  results.forEach(r => { const k = r.rarKey || r.r?.k || 'milspec'; cnt[k] = (cnt[k]||0)+1; });
+  const stCnt = results.filter(r => r.stattrak).length;
+  $('msum').innerHTML = TIER_ORDER.filter(k => cnt[k]).map(k => {
+    const ti = TIER_INFO[k] || {n:k, c:'#9aa0b8'};
+    return `<div class="mtag"><span style="width:7px;height:7px;border-radius:50%;background:${ti.c};display:inline-block"></span>${ti.n} <b style="color:${ti.c}">×${cnt[k]}</b></div>`;
+  }).join('')
+   + (stCnt ? `<div class="mtag">StatTrak™ <b style="color:#cbd0e8">×${stCnt}</b></div>` : '')
+   + `<div class="mtag hi">最高价值 <b>${fmt(bestP)}</b></div>`;
 
   const total = results.reduce((s, r) => s + r.p, 0);
-  const cost = getCaseOpenCost(curCase) * qty;
+  const cost = getCaseOpenCost(curCase) * n;
   const roi = total - cost;
-  $('mtot').innerHTML = `总价值: <span>${fmt(total)}</span> &nbsp; 
-    收益: <span style="color:${roi>=0?'var(--ok)':'var(--danger)'}">
-    ${roi>=0?'+':''}${fmt(roi)}</span>`;
+  const roiPct = cost > 0 ? (roi / cost) * 100 : 0;
+  $('mhdr').innerHTML = `🎰 ${n} 连开结果<small>${esc(curCase?.name||'')} · ${typeCn(curCase?.type)} · 花费 ${fmt(cost)}</small>`;
+  $('mtot').innerHTML = `花费 <span style="color:var(--txt)">${fmt(cost)}</span> &nbsp;·&nbsp; 回收 <span style="color:var(--txt)">${fmt(total)}</span> &nbsp;·&nbsp; `
+    + `盈亏 <span style="color:${roi>=0?'var(--ok)':'var(--danger)'}">${fmtSgn(roi)}（${roiPct>=0?'+':''}${roiPct.toFixed(1)}% ROI）</span>`
+    + `<br><span style="font-size:11px;color:var(--muted)">全部物品已存入背包，可直接「全部卖出」或到背包逐个卖</span>`;
 
+  $('bsall').textContent = `💰 全部卖出 +${fmt(total)}`;
+  $('bagain-m').textContent = `🔑 再开 ×${n}`;
   $('tw').style.display = 'none'; $('rp').classList.remove('on'); $('mpanel').classList.add('on');
   $('slbl').textContent = ''; $('sov').classList.add('on');
 }
@@ -967,26 +1110,34 @@ function sell1() {
   bal += lastItem.p;
   const idx = inv.findIndex(i => i._uid === lastItem._uid);
   if (idx !== -1) inv.splice(idx, 1);
-  save(); updateBal(); toast(`卖出 ${lastItem.name} +${fmt(lastItem.p)}`,'ok'); closeSpin();
+  save(); updateBal();
+  toast(`已卖出 ${displayName(lastItem)} +${fmt(lastItem.p)}，余额 ${fmt(bal)}`,'ok'); closeSpin();
 }
 function sellAll() {
-  if (!lastMulti) return;
+  if (!lastMulti?.length) return;
   let t = 0;
-  lastMulti.forEach(it => { t += it.p; const idx = inv.findIndex(i => i._uid === it._uid); if (idx !== -1) inv.splice(idx, 1); });
-  bal += t; save(); updateBal(); toast(`全部卖出 +${fmt(t)}`,'ok'); closeSpin();
+  lastMulti.forEach(it => {
+    t += it.p;
+    const idx = inv.findIndex(i => i._uid === it._uid);
+    if (idx !== -1) inv.splice(idx, 1);
+  });
+  bal += t; save(); updateBal();
+  toast(`已卖出 ${lastMulti.length} 件 +${fmt(t)}，余额 ${fmt(bal)}`,'ok'); closeSpin();
 }
-function again() { closeSpin(); openModal(curCase); }
+// 按当前数量再开一次（保留 ×50 / ×100 这类选择）
+function again() { const q = qty; closeSpin(); openModal(curCase, q); }
 function closeSpin() {
   $('sov').classList.remove('on'); $('rp').classList.remove('on'); $('mpanel').classList.remove('on');
+  $('track').innerHTML = ''; $('slbl').textContent = '🎰 开箱中…';
   lastItem = null; lastMulti = null;
 }
 
 // ══════════════════════════════════════════════
 //  INVENTORY
 // ══════════════════════════════════════════════
-function addInv(item) { inv.unshift(item); save(); }
+function addInv(item, skipSave) { inv.unshift(item); if (!skipSave) save(); }
 function buildInvChips() {
-  const rs = [{k:'all',l:'全部',c:'var(--txt)'},{k:'gold',l:'★ 刀/手套',c:'#e4ae39'},{k:'covert',l:'Covert',c:'#eb4b4b'},{k:'classified',l:'Classified',c:'#d32ce6'},{k:'restricted',l:'Restricted',c:'#8847ff'},{k:'milspec',l:'Mil-Spec',c:'#4b69ff'}];
+  const rs = [{k:'all',l:'全部',c:'var(--txt)'},{k:'gold',l:'★ 刀/手套',c:'#e4ae39'},{k:'covert',l:'隐秘级',c:'#eb4b4b'},{k:'classified',l:'保密级',c:'#d32ce6'},{k:'restricted',l:'受限级',c:'#8847ff'},{k:'milspec',l:'军规级',c:'#4b69ff'}];
   const w = $('ic');
   rs.forEach(r => {
     const b = document.createElement('button'); b.className = 'chip' + (r.k==='all'?' on':'');
@@ -995,24 +1146,32 @@ function buildInvChips() {
     w.appendChild(b);
   });
 }
+function invList() {
+  return invF === 'all' ? [...inv] : inv.filter(i => i.rarKey === invF || i.r?.k === invF);
+}
 function renderInv() {
-  let list = invF === 'all' ? [...inv] : inv.filter(i => i.rarKey === invF || i.r?.k === invF);
+  const list = invList();
   $('sc').textContent = inv.length;
   $('sv').textContent = fmt(inv.reduce((s, i) => s + (i.p||0), 0));
   $('so').textContent = opens;
   const best = inv.reduce((b, i) => i.p > (b?.p||0) ? i : b, null);
   $('sbest').textContent = best ? fmt(best.p) : '—';
+  const nSell = list.length;
+  const btn = $('sellrest');
+  if (btn) {
+    btn.style.display = nSell ? '' : 'none';
+    btn.textContent = `💰 一键卖出${invF==='all'?'全部':`当前筛选`} ${nSell} 件（${fmt(list.reduce((s,i)=>s+(i.p||0),0))}）`;
+  }
   const g = $('ig'); g.innerHTML = '';
   if (!list.length) {
-    g.innerHTML = `<div class="empty">${invF!=='all'?'该稀有度暂无物品':'背包是空的，去开箱吧！'}</div>`; return;
+    g.innerHTML = `<div class="empty">${invF!=='all'?'该稀有度下暂无物品':'背包是空的，去开箱吧！'}</div>`; return;
   }
   list.forEach(item => {
     const d = document.createElement('div'); d.className = 'icard'; d.style.borderColor = item.r?.c||'#555';
-    const name = (item.stattrak ? 'ST™ ' : '') + (item.name||'');
     d.innerHTML = `<button class="ic-sell" onclick="sellInv('${item._uid}',event)">卖 ${fmt(item.p)}</button>
-      <img src="${item.image||''}" loading="lazy" onerror="this.src='${IMG_FB}'"/>
-      <div class="ic-n" style="color:${item.r?.c||'#aaa'}">${name}</div>
-      <div class="ic-w">${item.wear||''}</div>
+      <img src="${item.image||''}" loading="lazy" onerror="this.src='${IMG_FB}'" alt="${esc(item.name)}"/>
+      <div class="ic-n" style="color:${item.r?.c||'#aaa'}">${esc(displayName(item, true))}</div>
+      <div class="ic-w">${esc(wearCn(item))}</div>
       <div class="ic-p">${fmt(item.p)}</div>`;
     g.appendChild(d);
   });
@@ -1021,21 +1180,33 @@ function sellInv(uid, e) {
   e.stopPropagation();
   const idx = inv.findIndex(i => i._uid === uid); if (idx === -1) return;
   const it = inv[idx]; bal += it.p; inv.splice(idx, 1); save(); updateBal();
-  toast(`卖出 +${fmt(it.p)}`,'ok'); renderInv();
+  toast(`已卖出 ${displayName(it, true)} +${fmt(it.p)}`,'ok'); renderInv();
+}
+// 批量卖出（100 连开后逐个点太累）
+function sellFiltered() {
+  const list = invList();
+  if (!list.length) { toast('没有可卖出的物品','err'); return; }
+  const total = list.reduce((s,i) => s + (i.p||0), 0);
+  if (!confirm(`确认卖出 ${list.length} 件物品，共 ${fmt(total)}？`)) return;
+  const uids = new Set(list.map(i => i._uid));
+  inv = inv.filter(i => !uids.has(i._uid));
+  bal += total; save(); updateBal(); renderInv();
+  toast(`已卖出 ${list.length} 件 +${fmt(total)}，余额 ${fmt(bal)}`,'ok');
 }
 
 // ══════════════════════════════════════════════
 //  HISTORY
 // ══════════════════════════════════════════════
-function addHist(item) {
+function addHist(item, skipSave) {
   hist.unshift({
-    name: (item.stattrak?'StatTrak™ ':'')+item.name,
-    image: item.image, wear: item.wear,
+    name: displayName(item),
+    image: item.image, wear: item.wear, wearCn: item.wearCn,
     r: item.r, rarKey: item.rarKey,
     p: item.p, isRare: item.isRare,
     case: curCase?.name||'', ts: Date.now(),
   });
-  if (hist.length > 300) hist.pop(); save();
+  if (hist.length > 400) hist.length = 400;
+  if (!skipSave) save();
 }
 function ago(ts) {
   const s = Math.floor((Date.now()-ts)/1000);
@@ -1044,20 +1215,25 @@ function ago(ts) {
 }
 function renderHist() {
   const l = $('hl');
-  if (!hist.length) { l.innerHTML='<div style="color:var(--muted);padding:50px;text-align:center">暂无记录</div>'; return; }
+  if (!hist.length) { l.innerHTML='<div style="color:var(--muted);padding:50px;text-align:center">暂无开箱记录，去武器箱开一次吧</div>'; return; }
   l.innerHTML = '';
+  const total = hist.reduce((s,h)=>s+(h.p||0),0);
+  const head = document.createElement('div');
+  head.style.cssText = 'font-size:11px;color:var(--muted);margin-bottom:4px';
+  head.textContent = `共 ${hist.length} 条记录（最多保留最近 400 条）· 这些物品合计价值 ${fmt(total)}`;
+  l.appendChild(head);
   hist.slice(0, 200).forEach(h => {
     const d = document.createElement('div'); d.className = 'hi';
     d.innerHTML = `
       <div class="hbar" style="background:${h.r?.c||'#555'}"></div>
-      <img class="himg" src="${h.image||''}" onerror="this.src='${IMG_FB}'"/>
+      <img class="himg" src="${h.image||''}" loading="lazy" onerror="this.src='${IMG_FB}'" alt="${esc(h.name)}"/>
       <div class="hinfo">
-        <div class="hname" style="color:${h.r?.c||'var(--txt)'}">${h.name||''}</div>
-        <div class="hmeta">${h.case} · ${h.wear||''}</div>
+        <div class="hname" style="color:${h.r?.c||'var(--txt)'}">${esc(h.name||'')}</div>
+        <div class="hmeta">${esc(h.case||'')} · ${esc(h.r?.cn || h.r?.l || '')} · ${esc(wearCn(h))}</div>
       </div>
       <div>
         <div class="hprice">${fmt(h.p)}</div>
-        <div class="hprice-sub">≈¥${(h.p*7.2).toFixed(0)}</div>
+        <div class="hprice-sub">≈${cny(h.p)}</div>
       </div>
       <div class="htime">${ago(h.ts)}</div>`;
     l.appendChild(d);
@@ -1068,11 +1244,20 @@ function renderHist() {
 //  SKINS PAGE
 // ══════════════════════════════════════════════
 function buildRarChips() {
-  const rs = [{k:'all',l:'全部'},{k:'covert',l:'Covert',c:'#eb4b4b'},{k:'classified',l:'Classified',c:'#d32ce6'},{k:'restricted',l:'Restricted',c:'#8847ff'},{k:'milspec',l:'Mil-Spec',c:'#4b69ff'},{k:'industrial',l:'Industrial',c:'#5e98d9'},{k:'consumer',l:'Consumer',c:'#b0c3d9'}];
-  const w = $('rc2');
+  const rs = [
+    {k:'all',l:'全部'},{k:'contraband',l:'违禁品',c:'#e4ae39'},{k:'gold',l:'★ 非凡级（刀/手套）',c:'#e4ae39'},
+    {k:'covert',l:'隐秘级 Covert',c:'#eb4b4b'},{k:'classified',l:'保密级 Classified',c:'#d32ce6'},
+    {k:'restricted',l:'受限级 Restricted',c:'#8847ff'},{k:'milspec',l:'军规级 Mil-Spec',c:'#4b69ff'},
+    {k:'industrial',l:'工业级 Industrial',c:'#5e98d9'},{k:'consumer',l:'消费级 Consumer',c:'#b0c3d9'},
+  ];
+  const w = $('rc2'); w.innerHTML = '';
+  const cnt = {all: allSkins.length};
+  allSkins.forEach(s => { const k = (RARITY[s.rarity?.id]||{}).k; if (k) cnt[k] = (cnt[k]||0)+1; });
   rs.forEach(r => {
     const b = document.createElement('button'); b.className = 'chip' + (r.k==='all'?' on':'');
-    b.textContent = r.l; if (r.c) b.style.color = r.c;
+    b.textContent = cnt[r.k] ? `${r.l} ${cnt[r.k]}` : r.l;
+    b.dataset.r = r.k;
+    if (r.c) b.style.color = r.c;
     b.onclick = () => { rarF = r.k; w.querySelectorAll('.chip').forEach(x=>x.classList.remove('on')); b.classList.add('on'); filterSkins(); };
     w.appendChild(b);
   });
@@ -1081,32 +1266,42 @@ function initSkins(skins) {
   skFiltered = [...skins]; skOff = 0;
   const w = $('sw'); w.innerHTML = '';
   const g = document.createElement('div'); g.className = 'sg'; g.id = 'sg'; w.appendChild(g);
-  const sen = document.createElement('div'); sen.id = 'sen'; w.appendChild(sen);
+  const sen = document.createElement('div'); sen.id = 'sen'; sen.style.height = '1px'; w.appendChild(sen);
   new IntersectionObserver(en => { if (en[0].isIntersecting) loadSkins(); }, {rootMargin:'300px'}).observe(sen);
   loadSkins();
 }
 function filterSkins() {
-  const q = $('sq').value.toLowerCase();
+  const q = $('sq').value.trim().toLowerCase();
   skFiltered = allSkins.filter(s => {
     const r = RARITY[s.rarity?.id]||{};
-    return s.name.toLowerCase().includes(q) && (rarF==='all' || r.k===rarF);
+    const hay = `${s.name||''} ${s.weapon?.name||''}`.toLowerCase();
+    return (!q || hay.includes(q)) && (rarF==='all' || r.k===rarF);
   });
   skOff = 0; const g = $('sg'); if (g) g.innerHTML = '';
   loadSkins();
 }
 function loadSkins() {
   const g = $('sg'); if (!g) return;
-  skFiltered.slice(skOff, skOff + SK_PER).forEach(s => {
-    const r = RARITY[s.rarity?.id]||{l:'',c:'#555',k:'consumer'};
+  const slice = skFiltered.slice(skOff, skOff + SK_PER);
+  slice.forEach(s => {
+    const r = RARITY[s.rarity?.id] || {l:s.rarity?.name||'未知稀有度', cn:s.rarity?.name||'未知', c:'#9aa0b8', k:'milspec'};
     const ftP = getSkinPrice(s.name, r.k, 'Field-Tested');
     const d = document.createElement('div'); d.className = 'skcard'; d.style.borderColor = r.c;
-    d.innerHTML = `<img src="${s.image}" loading="lazy" onerror="this.src='${IMG_FB}'"/>
-      <div class="sk-n">${s.name}</div>
-      <div class="sk-r" style="color:${r.c}">${r.l}</div>
-      <div class="sk-p">${fmt(ftP)}<span style="font-size:8px;color:var(--muted)"> FT</span></div>`;
+    d.innerHTML = `<img src="${s.image}" loading="lazy" decoding="async" onerror="this.src='${IMG_FB}'" alt="${esc(s.name)}"/>
+      <div class="sk-n">${esc(s.name)}</div>
+      <div class="sk-r" style="color:${r.c}">${esc(r.cn || r.l)}</div>
+      <div class="sk-p">${fmt(ftP)}<span style="font-size:8px;color:var(--muted)"> 久经沙场价</span></div>`;
     g.appendChild(d);
   });
-  skOff += SK_PER;
+  skOff += slice.length;
+  $('scount').textContent = skFiltered.length
+    ? `已显示 ${Math.min(skOff, skFiltered.length)} / ${skFiltered.length} 个皮肤`
+    : '没有匹配的皮肤，换个关键词试试';
+  // 内容不足一屏时继续补齐（否则无限滚动的哨兵不再触发，会卡在空列表）
+  const sen = $('sen');
+  if (skOff < skFiltered.length && sen && sen.getBoundingClientRect().top < innerHeight + 320) {
+    requestAnimationFrame(loadSkins);
+  }
 }
 
 // ══════════════════════════════════════════════
